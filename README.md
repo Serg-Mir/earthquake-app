@@ -159,3 +159,15 @@ INFO: [earthquake_app.utils:store_in_bigquery:43] Data stored successfully.
 ---
 
 ```
+### Stored data example from BQ side
+![BQ screen](images/BQ_data_inserted.jpeg)
+
+
+## Further Improvements and Ideas:
+1. Consider adding validation to check if data already exists on BigQuery, focusing on specific fields to maintain data integrity.
+2. Add additional optional [parameters](https://earthquake.usgs.gov/fdsnws/event/1/#extensions) as input arguments, such as event types or maximum magnitude, for more refined queries.
+3. Explore potential Machine Learning applications for predicting upcoming earthquakes using such historical data.
+4. Implement visualization enhancements to display earthquake data on maps or graphs.
+5. Improve error handling for API requests and data processing, providing informative user feedback.
+6. Investigate batch processing to handle large data volumes efficiently.
+7. Expand user documentation to include more examples, FAQs, and troubleshooting tips.

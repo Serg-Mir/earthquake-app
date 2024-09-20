@@ -3,9 +3,9 @@ FROM python:3.11-slim
 WORKDIR /earthquake_app
 ENV PYTHONPATH="${PYTHONPATH}:earthquake_app"
 
-COPY requirements.txt .
+COPY requirements/base.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r base.txt
 
 COPY . .
 

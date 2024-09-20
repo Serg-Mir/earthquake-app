@@ -17,7 +17,7 @@ def test_fetch_earthquake_data_success(mock_request):
     }
     mock_request.return_value = mock_response
 
-    data = fetch_earthquake_data(34.05, -118.25, "2024-09-01", "2024-09-15", 100)
+    data = fetch_earthquake_data(34.05, -118.25, "2024-09-01", "2024-09-15", 100.0)
 
     assert len(data) == 1
     assert data[0]["place"] == "Los Angeles"
@@ -32,7 +32,7 @@ def test_fetch_earthquake_data_failure(mock_request):
     mock_request.return_value = mock_response
 
     with pytest.raises(Exception, match=r"API request failed with status code 500"):
-        fetch_earthquake_data(34.05, -118.25, "2024-09-01", "2024-09-15", 100)
+        fetch_earthquake_data(34.05, -118.25, "2024-09-01", "2024-09-15", 100.0)
 
 
 @patch("earthquake_app.core.utils.bigquery.Client")

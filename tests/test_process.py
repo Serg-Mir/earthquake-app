@@ -20,7 +20,7 @@ def test_fetch_earthquakes_near_offices(mock_get_settings, mock_fetch_data, mock
         }
     ]
 
-    fetch_earthquakes_near_offices("2024-09-01", "2024-09-15", 100)
+    fetch_earthquakes_near_offices("2024-09-01", "2024-09-15", 100.0)
 
     mock_fetch_data.assert_called()
     mock_store_in_bigquery.assert_called()
@@ -39,7 +39,7 @@ def test_fetch_earthquakes_custom_zone(mock_fetch_data, mock_store_in_bigquery):
         }
     ]
 
-    fetch_earthquakes_custom_zone(40.7128, -74.0060, "2024-09-01", "2024-09-15", 50)
+    fetch_earthquakes_custom_zone(40.7128, -74.0060, "2024-09-01", "2024-09-15", 50.0)
 
-    mock_fetch_data.assert_called_once_with(40.7128, -74.0060, "2024-09-01", "2024-09-15", 50)
+    mock_fetch_data.assert_called_once_with(40.7128, -74.0060, "2024-09-01", "2024-09-15", 50.0)
     mock_store_in_bigquery.assert_called_once()

@@ -5,7 +5,7 @@ ENV PYTHONPATH="${PYTHONPATH}:earthquake_app"
 
 COPY requirements/*.txt ./requirements/
 
-RUN pip install --no-cache-dir -r base.txt
+RUN pip install --no-cache-dir -r requirements/base.txt
 
 COPY . .
 

@@ -1,23 +1,17 @@
-import pytest
 from unittest.mock import patch, MagicMock
+import pytest
 from earthquake_app.core.utils import fetch_earthquake_data, store_in_bigquery
 
 
-@patch('earthquake_app.core.utils.USGSClient.request')
+@patch("earthquake_app.core.utils.USGSClient.request")
 def test_fetch_earthquake_data_success(mock_request):
     mock_response = MagicMock()
     mock_response.ok = True
     mock_response.json.return_value = {
         "features": [
             {
-                "properties": {
-                    "time": "2024-09-15T00:00:00Z",
-                    "mag": 4.5,
-                    "place": "Los Angeles"
-                },
-                "geometry": {
-                    "coordinates": [-118.25, 34.05]
-                }
+                "properties": {"time": "2024-09-15T00:00:00Z", "mag": 4.5, "place": "Los Angeles"},
+                "geometry": {"coordinates": [-118.25, 34.05]},
             }
         ]
     }
@@ -29,7 +23,7 @@ def test_fetch_earthquake_data_success(mock_request):
     assert data[0]["place"] == "Los Angeles"
 
 
-@patch('earthquake_app.core.utils.USGSClient.request')
+@patch("earthquake_app.core.utils.USGSClient.request")
 def test_fetch_earthquake_data_failure(mock_request):
     mock_response = MagicMock()
     mock_response.ok = False
@@ -41,7 +35,7 @@ def test_fetch_earthquake_data_failure(mock_request):
         fetch_earthquake_data(34.05, -118.25, "2024-09-01", "2024-09-15", 100)
 
 
-@patch('earthquake_app.core.utils.bigquery.Client')
+@patch("earthquake_app.core.utils.bigquery.Client")
 def test_store_in_bigquery_success(mock_bigquery_client):
     # Mock settings and BigQuery client
 
@@ -56,7 +50,7 @@ def test_store_in_bigquery_success(mock_bigquery_client):
     mock_client_instance.insert_rows_json.assert_called_once()
 
 
-@patch('earthquake_app.core.utils.bigquery.Client')
+@patch("earthquake_app.core.utils.bigquery.Client")
 def test_store_in_bigquery_failure(mock_bigquery_client, caplog):
     # Mock the BigQuery client's insert_rows_json method to simulate an error
     mock_client_instance = mock_bigquery_client.return_value

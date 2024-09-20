@@ -9,3 +9,4 @@ pydantic[dotenv]==1.10.2
 numpy==1.24.4
 tenacity==8.2.3
 pytest==8.3.3
+pylint==2.15.5

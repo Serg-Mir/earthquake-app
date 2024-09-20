@@ -1,5 +1,6 @@
 # Earthquake Detection and Storage Application
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/serg-mir/earthquake-app/ci.yml?branch=main&style=for-the-badge)
+<!-- To Do: Replace the repository name with the correct one if the repository goes public. The badge below is an example. -->
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/serg-mir/sentinel-image-processing-api/ci.yml?branch=main&style=for-the-badge)
 
 ## Overview
 This Python application retrieves earthquake data from the [USGS API](https://earthquake.usgs.gov/fdsnws/event/1/), filters the results based on proximity to known Pleo office locations by default, and stores the data in Google BigQuery. It also supports custom location, period, and radius inputs.

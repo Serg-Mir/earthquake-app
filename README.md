@@ -1,23 +1,34 @@
 # Earthquake Detection and Storage Application
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/serg-mir/soil-data-processing-api/ci.yml?branch=main&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/serg-mir/earthquake-app/ci.yml?branch=main&style=for-the-badge)
 
 ## Overview
-This Python application fetches earthquake data from the USGS API, filters results based on proximity to Pleo's offices by default, and stores the data in Google BigQuery.
+This Python application retrieves earthquake data from the [USGS API](https://earthquake.usgs.gov/fdsnws/event/1/), filters the results based on proximity to known Pleo office locations by default, and stores the data in Google BigQuery. It also supports custom location, period, and radius inputs.
 
 ## Features:
 - Fetch earthquake data from the USGS API.
-- Filter by proximity to Pleo office locations.
+- Filter earthquakes by proximity to Pleo office locations.
 - Store earthquake data in Google BigQuery.
-- Custom input support for location, period and radius
+- Support for custom location, period, and radius inputs.
 
-## Local installation:
+## Input
+* `--lat`: Optional override for latitude (must be used together with `--lon`)
+* `--lon`: Optional override for longitude (must be used together with `--lat`)
+* `--start_time`: Optional override for the start date (Format: `YYYY-MM-DD`, default=`"2023-01-01"`)
+* `--end_time`: Optional override for the end date (Format: `YYYY-MM-DD`, default=`2023-12-31`)
+* `--radius`: Optional override for the maximum radius in kilometers (`integer`)
+
+
+ℹ️ Note: Specifying `lat` or `lon` will override the default Pleo office locations.
+
+
+## Local installation
 
 1. Clone the repository:
     ```bash
     git clone git@github.com:Serg-Mir/earthquake-app.git
     cd earthquake-app
     ```
-2. Type on the terminal:
+2. Run in the terminal:
    ```bash
    python -m venv ~/.earthquake-app
    ```
@@ -29,13 +40,22 @@ This Python application fetches earthquake data from the USGS API, filters resul
 4. Install the dependencies:
    ```bash
    pip install -r requirements/base.txt
-   pip install -r requirements/development.txt
    ```
 
 5. Run the app:
     ```bash
-    python earthquake_app/main.py
+    $ python earthquake_app/main.py
     ```
+
+## Setting up Google Cloud Credentials
+
+To enable the application to store data in Google BigQuery, you'll need to provide the `GOOGLE_APPLICATION_CREDENTIALS` JSON file, which contains your Google Cloud service account credentials.
+
+1. Follow the official Google Cloud documentation to [create a service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
+2. Download the JSON key file and set the path to the file using the `GOOGLE_APPLICATION_CREDENTIALS` environment variable as shown in the Docker setup or when running locally.
+
+> For more information, visit the [Google Cloud documentation](https://cloud.google.com/docs/authentication/getting-started).
+
 
 ## Docker setup
 
@@ -59,15 +79,15 @@ You can run the Docker container in local once the image is built:
 docker run --env-file .env --env GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials/file.json" earthquake-app <ARGUMENTS>
 ```
 ## Testing
-1. You might need to add the generated project root directory to the
-[`PYTHONPATH`](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH) in some cases: `export PYTHONPATH="{$PYTHONPATH}:/absolute/path/to/project"`
-2. Run `pytest tests/` (_not implemented yet_)
+1. You may need to add the project root directory to the
+[`PYTHONPATH`](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH). Run the following command to do so: `export PYTHONPATH="{$PYTHONPATH}:/absolute/path/to/project"`
+2. Install dependencies `pip install -r requirements/development.txt`
+3. Run `pytest tests/`
 
 
 ## Contributing
 
-Before starting to contribute to earthquake-app, please install `pre-commit` to make
-sure your changes get checked for style and standards before committing them to repository:
+Before starting to contribute to earthquake-app, please install `pre-commit` to ensure your changes are checked for style and standards before committing them to the repository:
 
     $ pre-commit install
 
@@ -77,7 +97,8 @@ If you are running the Docker setup, please install it with `pip` in your host m
     $ pip install pre-commit
 
 
-## Usage examples:
+## Usage examples
+Below are examples demonstrating default usage, custom inputs, and using the pre-built Docker container.
 ### Default values(pre-defined known offices locations)
 ```
 $ python earthquake_app/main.py

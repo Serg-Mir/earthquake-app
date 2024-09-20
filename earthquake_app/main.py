@@ -2,7 +2,7 @@ import logging.config
 from earthquake_app.config.logging import get_logging_config
 import argparse
 from earthquake_app.process import fetch_earthquakes_near_offices, fetch_earthquakes_custom_zone
-from earthquake_app.utils import validate_dates
+from earthquake_app.core.utils import validate_dates
 
 
 def main():

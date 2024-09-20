@@ -7,7 +7,7 @@ from pydantic import BaseSettings, HttpUrl
 class Settings(BaseSettings):
     debug: bool = False
     USGS_API_URL: HttpUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query"
-    table_id = "earthquake-data-436210.earthquakes.collected_data"
+    bq_table_id: str = "earthquake-data-436210.earthquakes.collected_data"
 
     # Coordinates of Pleo offices
     office_locations = [

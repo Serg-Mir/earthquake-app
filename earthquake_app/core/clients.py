@@ -1,8 +1,5 @@
 import logging
-import requests
 
-# from google.oauth2 import id_token
-# from google.auth.transport.requests import Request
 from requests import Session
 from tenacity import before_sleep_log, retry, stop_after_attempt, wait_exponential
 

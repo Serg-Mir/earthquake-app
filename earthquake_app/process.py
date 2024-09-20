@@ -1,4 +1,4 @@
-from utils import fetch_earthquake_data, store_in_bigquery
+from earthquake_app.core.utils import fetch_earthquake_data, store_in_bigquery
 from earthquake_app.config.settings import get_settings
 import logging.config
 

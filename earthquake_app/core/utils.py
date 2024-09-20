@@ -36,7 +36,7 @@ def fetch_earthquake_data(lat, lon, start_time, end_time, radius):
     raise Exception(f"API request failed with status code {response.status_code}")
 
 
-def store_in_bigquery(data, table=get_settings().table_id):
+def store_in_bigquery(data, table=get_settings().bq_table_id):
     client = bigquery.Client()
     datastore_event = client.insert_rows_json(table, data)
     if not datastore_event:

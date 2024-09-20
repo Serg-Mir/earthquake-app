@@ -19,7 +19,7 @@ This Python application retrieves earthquake data from the [USGS API](https://ea
 * `--radius`: Optional override for the maximum radius in kilometers (`integer`)
 
 
-ℹ️ Note: Specifying `lat` or `lon` will override the default Pleo office locations.
+ℹ️ Note: Specifying `lat` and `lon` will override the default Pleo office locations.
 
 
 ## Local installation
@@ -101,7 +101,7 @@ If you are running the Docker setup, please install it with `pip` in your host m
 ## Usage examples
 Below are examples demonstrating default usage, custom inputs, and using the pre-built Docker container.
 ### Default values(pre-defined known offices locations)
-```
+```text
 $ python earthquake_app/main.py
 INFO: [earthquake_app.process:fetch_earthquakes_near_offices:13] Earthquake data found for 2 km WSW of Marans, France
 INFO: [earthquake_app.process:fetch_earthquakes_near_offices:16] Successfully stored in BigQuery.
@@ -120,14 +120,14 @@ INFO: [earthquake_app.process:fetch_earthquakes_near_offices:16] Successfully st
 ---
 ```
 ### Custom coordinates and radius
-```
+```text
 $ python earthquake_app/main.py --lat 13.006395484423336 --lon 42.734473054904896 --radius 650
 INFO: [earthquake_app.process:fetch_earthquakes_custom_zone:22] Earthquake data found for 154 km NNW of Las Khorey, Somalia
 INFO: [earthquake_app.utils:store_in_bigquery:43] Data stored successfully.
 ---
 ```
 ### Using pre-built docker container
-```
+```text
 $ docker run --env GOOGLE_APPLICATION_CREDENTIALS=earthquake-data-436210-a18aafd4ce1e.json earthquake-app --lat 35 --lon 44 --radius 660
 INFO: [earthquake_app.process:fetch_earthquakes_custom_zone:22] Earthquake data found for 8 km N of Doğanyol, Turkey
 INFO: [earthquake_app.utils:store_in_bigquery:43] Data stored successfully.

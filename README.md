@@ -1,7 +1,7 @@
 # Earthquake Detection and Storage Application
 
 ## Overview
-This Python application fetches earthquake data from the USGS API, filters results based on proximity to Pleo's offices, and stores the data in Google BigQuery.
+This Python application fetches earthquake data from the USGS API, filters results based on proximity to Pleo's offices by default, and stores the data in Google BigQuery.
 
 ## Features:
 - Fetch earthquake data from the USGS API.
@@ -13,7 +13,7 @@ This Python application fetches earthquake data from the USGS API, filters resul
 
 1. Clone the repository:
     ```
-    git clone https://github.com/your-repo/earthquake-app.git
+    git clone git@github.com:Serg-Mir/earthquake-app.git
     cd earthquake-app
     ```
 
@@ -48,7 +48,10 @@ You can run the Docker container in local once the image is built:
 ```bash
 docker run --env-file .env --env GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials/file.json" earthquake-app <ARGUMENTS>
 ```
-
+## Testing
+1. You might need to add the generated project root directory to the
+[`PYTHONPATH`](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH) in some cases: `export PYTHONPATH="{$PYTHONPATH}:/absolute/path/to/project"`
+2. Run `pytest tests/` (_not implemented yet_)
 
 ## Usage examples:
 ### Default values(pre-defined known offices locations)

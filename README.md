@@ -11,13 +11,11 @@ This Python application retrieves earthquake data from the [USGS API](https://ea
 - Store earthquake data in Google BigQuery.
 - Support for custom location, period, and radius inputs.
 
-## Input
-* `--lat`: Optional override for latitude (must be used together with `--lon`)
-* `--lon`: Optional override for longitude (must be used together with `--lat`)
-* `--start_time`: Optional override for the start date (Format: `YYYY-MM-DD`, default=`"2023-01-01"`)
-* `--end_time`: Optional override for the end date (Format: `YYYY-MM-DD`, default=`2023-12-31`)
-* `--radius`: Optional override for the maximum radius in kilometers (`integer`)
-
+* `--lat`: Optional latitude override (must be provided with `--lon`). Type: `float`. Valid range: -90.0 to 90.0 degrees.
+* `--lon`: Optional longitude override (must be provided with `--lat`). Type: `float`. Valid range: -180.0 to 180.0 degrees.
+* `--start_time`: Optional start date override. Type: `string` (Format: `YYYY-MM-DD`, default=`"2023-01-01"`). Must be earlier than `--end_time` and no later than the current date.
+* `--end_time`: Optional end date override. Type: `string` (Format: `YYYY-MM-DD`, default=`"2023-12-31"`). Must be later than `--start_time` and no later than the current date.
+* `--radius`: Optional maximum radius in kilometers. Type: `float`. Must be between 0 and 20001.6 km (default=`500.0`).
 
 ℹ️ Note: Specifying `lat` and `lon` will override the default Pleo office locations.
 
@@ -43,10 +41,27 @@ This Python application retrieves earthquake data from the [USGS API](https://ea
    pip install -r requirements/base.txt
    ```
 
-5. Run the app:
+5. Consider overriding default settings in the `.env` file:
+   - You can customize settings such as `USGS_API_URL`, `bq_table_id`, and other configuration parameters by creating a `.env` file in the project root.
+   - The settings will be loaded automatically at runtime, allowing you to tailor the application to your needs.
+   - Example `.env` file:
+     ```
+     DEBUG=True
+     USGS_API_URL=https://your-custom-url.com
+     BQ_TABLE_ID=your_project.your_dataset.your_table
+     ```
+6. Set up [GOOGLE_APPLICATION_CREDENTIALS](#setting-up-google-cloud-credentials) env variable in order to save data on BigQuery:
+   ```bash
+   export GOOGLE_APPLICATION_CREDENTIALS=~/credentials/earthquake-data-436210-a18aafd4ce1e.json
+   ```
+7. Run the app:
     ```bash
     $ python earthquake_app/main.py
     ```
+8. Run the app with custom inputs:
+   ```bash
+   $ python earthquake_app/main.py --lat 13.006395484423336 --lon 42.734473054904896 --radius 650.0
+   ```
 
 ## Setting up Google Cloud Credentials
 
@@ -81,9 +96,19 @@ docker run --env-file .env --env GOOGLE_APPLICATION_CREDENTIALS="/path/to/creden
 ```
 ## Testing
 1. You may need to add the project root directory to the
-[`PYTHONPATH`](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH). Run the following command to do so: `export PYTHONPATH="{$PYTHONPATH}:/absolute/path/to/project"`
-2. Install dependencies `pip install -r requirements/development.txt`
-3. Run `pytest tests/`
+[`PYTHONPATH`](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH). Run the following command to do so:
+
+   ```bash
+   export PYTHONPATH="{$PYTHONPATH}:/absolute/path/to/project"
+   ```
+2. Install related dependencies
+   ```bash
+   pip install -r requirements/development.txt
+   ```
+3. Run
+   ```bash
+   pytest tests/
+   ```
 
 
 ## Contributing

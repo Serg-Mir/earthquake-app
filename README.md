@@ -171,3 +171,8 @@ INFO: [earthquake_app.utils:store_in_bigquery:43] Data stored successfully.
 5. Improve error handling for API requests and data processing, providing informative user feedback.
 6. Investigate batch processing to handle large data volumes efficiently.
 7. Expand user documentation to include more examples, FAQs, and troubleshooting tips.
+
+## Notes
+1. I pretty much enjoyed building this application because of the significance of the data and the potential it holds for future use cases.
+2. My decision to use these technologies was driven by my previous successful experience and a clear understanding of how they align with industry standards and methodologies.
+3. I enjoy developing robust solutions that add value. I consistently seek ways to enhance my work, and for future production improvements if we'd need to retrieve multiple amount of locations, I would prioritize implementing chunking for the datastore in an asynchronous manner to optimize performance.

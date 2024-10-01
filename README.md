@@ -3,11 +3,11 @@
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/serg-mir/sentinel-image-processing-api/ci.yml?branch=main&style=for-the-badge)
 
 ## Overview
-This Python application retrieves earthquake data from the [USGS API](https://earthquake.usgs.gov/fdsnws/event/1/), filters the results based on proximity to known Pleo office locations by default, and stores the data in Google BigQuery. It also supports custom location, period, and radius inputs.
+This Python application retrieves earthquake data from the [USGS API](https://earthquake.usgs.gov/fdsnws/event/1/), filters the results based on proximity to specific locations by default, and stores the data in Google BigQuery. It also supports custom location, period, and radius inputs.
 
 ## Features:
 - Fetch earthquake data from the USGS API.
-- Filter earthquakes by proximity to Pleo office locations.
+- Filter earthquakes by proximity to pre-defined locations.
 - Store earthquake data in Google BigQuery.
 - Support for custom location, period, and radius inputs.
 
@@ -17,7 +17,7 @@ This Python application retrieves earthquake data from the [USGS API](https://ea
 * `--end_time`: Optional end date override. Type: `string` (Format: `YYYY-MM-DD`, default=`"2023-12-31"`). Must be later than `--start_time` and no later than the current date.
 * `--radius`: Optional maximum radius in kilometers. Type: `float`. Must be between 0 and 20001.6 km (default=`500.0`).
 
-ℹ️ Note: Specifying `lat` and `lon` will override the default Pleo office locations.
+ℹ️ Note: Specifying `lat` and `lon` will override the default locations values.
 
 
 ## Local installation
@@ -125,7 +125,7 @@ If you are running the Docker setup, please install it with `pip` in your host m
 
 ## Usage examples
 Below are examples demonstrating default usage, custom inputs, and using the pre-built Docker container.
-### Default values(pre-defined known offices locations)
+### Default values(pre-defined known locations)
 ```text
 $ python earthquake_app/main.py
 INFO: [earthquake_app.process:fetch_earthquakes_near_offices:13] Earthquake data found for 2 km WSW of Marans, France

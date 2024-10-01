@@ -9,8 +9,8 @@ class Settings(BaseSettings):
     USGS_API_URL: HttpUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query"
     bq_table_id: str = "earthquake-data-436210.earthquakes.collected_data"
 
-    # Coordinates of Pleo offices
-    office_locations = [
+    # Default coordinates related to specific areas
+    locations = [
         {"city": "Copenhagen", "lat": 55.6852, "lon": 12.5657},
         {"city": "Paris", "lat": 48.8718, "lon": 2.3259},
         {"city": "Berlin", "lat": 52.5216, "lon": 13.4117},

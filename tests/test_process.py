@@ -6,7 +6,7 @@ from earthquake_app.process import fetch_earthquakes_near_offices, fetch_earthqu
 @patch("earthquake_app.process.fetch_earthquake_data")
 @patch("earthquake_app.config.settings.get_settings")
 def test_fetch_earthquakes_near_offices(mock_get_settings, mock_fetch_data, mock_store_in_bigquery):
-    mock_get_settings.return_value.office_locations = [
+    mock_get_settings.return_value.locations = [
         {"lat": 34.05, "lon": -118.25, "city": "Los Angeles"},
         {"lat": 37.77, "lon": -122.42, "city": "San Francisco"},
     ]

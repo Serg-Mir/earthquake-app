@@ -1,4 +1,4 @@
-requests==2.32.3
+requests==2.32.4
 google-auth==2.15.0
 google-cloud-bigquery==3.25.0
 uvicorn==0.22.0

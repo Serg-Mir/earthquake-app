@@ -1,5 +1,6 @@
 import logging.config
 import argparse
+
 from earthquake_app.config.logging import get_logging_config
 from earthquake_app.process import fetch_earthquakes_near_offices, fetch_earthquakes_custom_zone
 from earthquake_app.core import utils
@@ -47,13 +48,20 @@ def main():
         default=500.0,
     )
 
+    parser.add_argument(
+        "--dry_run",
+        help="Skip datastore event",
+        type=bool,
+        required=False,
+        default=False,
+    )
+
     # Parse arguments
     args = parser.parse_args()
 
     # Validate lat and lon conditions
     if args.lat and not args.lon or not args.lat and args.lon:
         parser.error("Either both lat and lon must be set or neither.")
-
     elif args.lat and args.lon:
         utils.validate_latitude(args.lat)
         utils.validate_longitude(args.lon)
@@ -66,7 +74,7 @@ def main():
     else:
         utils.validate_radius(args.radius)
 
-        fetch_earthquakes_near_offices(args.start_time, args.end_time, args.radius)
+        fetch_earthquakes_near_offices(args.start_time, args.end_time, args.radius, args.dry_run)
 
 
 if __name__ == "__main__":

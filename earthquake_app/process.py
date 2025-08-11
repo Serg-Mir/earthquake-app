@@ -5,12 +5,13 @@ from earthquake_app.config.settings import get_settings
 logger = logging.getLogger(__name__)
 
 
-def fetch_earthquakes_near_offices(start_date: str, end_date: str, radius: float):
+def fetch_earthquakes_near_offices(start_date: str, end_date: str, radius: float, dry_run):
     for office in get_settings().locations:
         data = fetch_earthquake_data(office["lat"], office["lon"], start_date, end_date, radius)
         if data:
             logger.info("Earthquake data found for %s", data[0]["place"])
-            store_in_bigquery(data)
+            if not dry_run:
+                store_in_bigquery(data)
         else:
             logger.info("Earthquake data not found for %s", office["city"])
 

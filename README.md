@@ -1,6 +1,7 @@
 # Earthquake Detection and Storage Application
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/serg-mir/earthquake-app/ci.yml?branch=main&style=for-the-badge)
 
+[![Python Version](https://img.shields.io/badge/python-3.13.5+-blue)](https://www.python.org/)
 ## Overview
 This Python application retrieves earthquake data from the [USGS API](https://earthquake.usgs.gov/fdsnws/event/1/), filters the results based on proximity to specific locations by default, and stores the data in Google BigQuery. It also supports custom location, period, and radius inputs.
 
@@ -15,6 +16,7 @@ This Python application retrieves earthquake data from the [USGS API](https://ea
 * `--start_time`: Optional start date override. Type: `string` (Format: `YYYY-MM-DD`, default=`"2023-01-01"`). Must be earlier than `--end_time` and no later than the current date.
 * `--end_time`: Optional end date override. Type: `string` (Format: `YYYY-MM-DD`, default=`"2023-12-31"`). Must be later than `--start_time` and no later than the current date.
 * `--radius`: Optional maximum radius in kilometers. Type: `float`. Must be between 0 and 20001.6 km (default=`500.0`).
+* `--dry_run`: Optional to skip the datastore event.
 
 ℹ️ Note: Specifying `lat` and `lon` will override the default locations values.
 

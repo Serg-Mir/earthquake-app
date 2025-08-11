@@ -69,7 +69,7 @@ def main():
         utils.validate_radius(args.radius)
 
         fetch_earthquakes_custom_zone(
-            args.lat, args.lon, args.start_time, args.end_time, args.radius
+            args.lat, args.lon, args.start_time, args.end_time, args.radius, args.dry_run
         )
     else:
         utils.validate_radius(args.radius)

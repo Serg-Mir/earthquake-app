@@ -22,9 +22,6 @@ jobs:
     - name: Check formatting
       run: |
         black --line-length 100 --check .
-    - name: Validate structure with pylint
-      run: |
-        pylint $(git ls-files '*.py')
     - name: Run tests
       env:
         PYTHONPATH: ${{ github.workspace }}

@@ -1,5 +1,9 @@
 from unittest.mock import patch
-from earthquake_app.process import fetch_earthquakes_near_offices, fetch_earthquakes_custom_zone
+from earthquake_app.process import (
+    fetch_earthquakes_near_offices,
+    fetch_earthquakes_custom_zone,
+    EarthquakeQuery,
+)
 
 
 @patch("earthquake_app.process.store_in_bigquery")
@@ -39,7 +43,16 @@ def test_fetch_earthquakes_custom_zone(mock_fetch_data, mock_store_in_bigquery):
         }
     ]
 
-    fetch_earthquakes_custom_zone(40.7128, -74.0060, "2024-09-01", "2024-09-15", 50.0)
+    query = EarthquakeQuery(
+        lat=40.7128,
+        lon=-74.0060,
+        start_date="2024-09-01",
+        end_date="2024-09-15",
+        radius=50.0,
+        dry_run=False,
+    )
+
+    fetch_earthquakes_custom_zone(query)
 
     mock_fetch_data.assert_called_once_with(40.7128, -74.0060, "2024-09-01", "2024-09-15", 50.0)
     mock_store_in_bigquery.assert_called_once()
